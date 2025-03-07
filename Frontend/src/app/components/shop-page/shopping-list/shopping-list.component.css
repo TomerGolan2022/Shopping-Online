@@ -1,0 +1,85 @@
+/* Side Bar */
+
+.example-container {
+  width: auto;
+  height: 100%;
+  border: 1px solid rgba(0, 0, 0, 0.5);
+}
+
+.example-sidenav-content {
+  height: 100%;
+}
+
+.example-sidenav {
+  /* padding: 150px; */
+  width: 350px;
+}
+
+/* Search Bar */
+
+.text-contaniner{
+  height: 70vh;
+  overflow-y: scroll;
+}
+.search-input{
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+::ng-deep .highlighted-text{
+  background-color: yellow;
+}
+.searchContainer{
+  display: flex;
+}
+
+/* Product List */
+
+.cardList {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+}
+
+/* Column Gap */
+.cardList>* {
+  box-sizing: border-box;
+}
+
+.cardList>*:not(:last-child) {
+  margin: 15px;
+}
+
+/* Item sizing */
+.cardListItem {
+  flex: 0 1 calc(20% - 32px);
+  margin: 15px;
+}
+
+/* medium size viewport */
+@media screen and (max-width: 959px) {
+
+  /* Column Gap */
+  .cardList>*:not(:last-child) {
+    margin-right: 32px;
+  }
+
+  /* Item sizing */
+  .cardListItem {
+    flex: 0 1 calc(50% - 32px);
+  }
+}
+
+/* small size viewport */
+@media screen and (max-width: 599px) {
+  .cardList {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+
+  .cardList>*:not(:last-child) {
+    margin-right: unset;
+    margin-bottom: 32px;
+  }
+}

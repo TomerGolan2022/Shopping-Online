@@ -1,0 +1,94 @@
+<!-- <div class="box">
+
+    <button mat-button (click)="showEditing()">❌</button>
+
+    <form #productForm="ngForm">
+
+        <h2>Edit Product</h2>
+
+        <img mat-card-image style="width: 100%; max-width: 200px; height: auto; max-height: 150px;  margin: auto; padding: auto;"
+            src="http://localhost:3001/api/products/images/{{productToEdit.imageName}}">
+
+        <label>Select Category: </label>
+        <select name="categoryId" [(ngModel)]="productToEdit.categoryId" required>
+            <option selected disabled>Select Category</option>
+            <option *ngFor="let category of categories" [value]="category.categoryId">{{category.categoryName}}</option>
+        </select>
+
+        <label>Name: </label>
+        <input type="text" name="productName" [(ngModel)]="productToEdit.productName" required minlength="2" #nameControl="ngModel">
+        <span *ngIf="nameControl.errors?.['required'] && nameControl.touched">Missing name</span>
+        <span *ngIf="nameControl.errors?.['minlength'] && nameControl.touched">Name too short</span>
+
+        <label>Price: </label>
+        <input type="number" step="0.01" name="price" [(ngModel)]="productToEdit.price" #priceControl="ngModel" required min="0" max="1000">
+        <span *ngIf="priceControl.errors?.['required'] && priceControl.touched">Missing price</span>
+        <span *ngIf="priceControl.errors?.['min'] && priceControl.touched">Price can't be negative</span>
+        <span *ngIf="priceControl.errors?.['max'] && priceControl.touched">Price can't exceed 1000</span>
+
+        <label>Image: </label>
+        <input type="file" accept="images/*" #imageFile>
+
+        <button mat-button (click)="update()" [disabled]="productForm.invalid">Update</button>
+
+    </form>
+
+</div> -->
+
+
+<div class="box" style="width: 85%;">
+    <form [formGroup]="editProductForm" class="login-container">
+        <button mat-button (click)="showEditing()">❌</button>
+        <h2>Edit Product</h2>
+        <img mat-card-image style="width: 100%; max-width: 200px; height: auto; max-height: 150px;  margin: auto; padding: auto;"
+            src="http://localhost:3001/api/products/images/{{productToEdit.imageName}}">
+        <!-- Category ID -->
+        <div class="add-product-row">
+            <mat-form-field appearance="fill">
+                <mat-label>Category</mat-label>
+                <mat-select name="categoryId" [(ngModel)]="productToEdit.categoryId" formControlName="categoryIdCtrl">
+                    <mat-option disabled>Select category...</mat-option>
+                    <mat-option *ngFor="let category of categories" [value]="category.categoryId">
+                        {{category.categoryName}}
+                    </mat-option>
+                </mat-select>
+                <mat-error *ngIf="editProductForm.controls['categoryIdCtrl'].hasError('required')">Category is required
+                </mat-error>
+            </mat-form-field>
+        </div>
+        <br>
+        <!-- Product Name -->
+        <div class="add-product-row">
+            <mat-form-field appearance="fill">
+                <mat-label>Product Name</mat-label>
+                <input matInput name="productName" [(ngModel)]="productToEdit.productName" placeholder="Product Name"
+                    formControlName="productNameCtrl">
+                <mat-error *ngIf="editProductForm.controls['productNameCtrl'].hasError('required')">Product Name is
+                    required
+                </mat-error>
+            </mat-form-field>
+        </div>
+        <br>
+        <!-- Price -->
+        <div class="add-product-row">
+            <mat-form-field appearance="fill">
+                <mat-label>Price</mat-label>
+                <input matInput type="number" name="price" [(ngModel)]="productToEdit.price" placeholder="Price"
+                    formControlName="priceCtrl">
+                <mat-error *ngIf="editProductForm.controls['priceCtrl'].hasError('required')">Price is required
+                </mat-error>
+            </mat-form-field>
+        </div>
+        <br>
+        <!-- Image -->
+        <label>Image: </label><br>
+        <input type="file" accept="images/*" #imageFile placeholder="Image">
+        <br><br>
+        <!-- Buttons -->
+        <mat-dialog-actions>
+            <button mat-button (click)="update()" [disabled]="editProductForm.invalid">Update</button>
+        </mat-dialog-actions>
+    </form>
+</div>
+
+

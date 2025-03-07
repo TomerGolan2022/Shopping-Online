@@ -1,0 +1,20 @@
+<mat-card>
+    <div style="width: auto; height: 150px;">
+        <img mat-card-image
+            style="width: 100%; max-width: 200px; height: auto; max-height: 150px;  margin: auto; padding: auto;"
+            src="http://localhost:3002/api/products/images/{{product.imageName}}">
+    </div>
+    <mat-card-header>
+        <mat-card-title style="height: 50px; margin-top: 25px; font-size: larger;">{{product.productName}}
+        </mat-card-title>
+        <mat-card-subtitle style="height: 10px;">{{product.price | currency:"ILS"}}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-actions>
+        <!-- For Customer -->
+        <button *ngIf="user && isCustomer" mat-button (click)="addToCart()">Add To Cart</button>
+        <input type="number" *ngIf="user && isCustomer" min="1" max="20" name="amount" [(ngModel)]="item.amount">
+        <!-- Only Display For Admin -->
+        <button *ngIf="user && isAdmin" mat-button (click)="addToCart()" disabled>Add To Cart</button>
+        <input type="number" *ngIf="user && isAdmin" min="1" max="20" name="amount" [(ngModel)]="item.amount" disabled="">
+    </mat-card-actions>
+</mat-card>

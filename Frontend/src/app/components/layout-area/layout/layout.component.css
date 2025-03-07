@@ -1,0 +1,21 @@
+.layout {
+    height: 100%;
+	box-sizing: border-box;
+    display: grid;
+    grid-template-rows: 15% 85%;
+    grid-template-columns: repeat(6, 1fr);
+    overflow: auto;
+    background-color: white;
+}
+
+header {
+    grid-column: span 6;
+}
+
+main {
+    grid-column: span 6;
+    overflow: auto;
+}
+
+
+

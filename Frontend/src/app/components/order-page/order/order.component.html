@@ -1,0 +1,114 @@
+<div class="container">
+
+  <!-- Cart List -->
+  <mat-card>
+
+    <h1>Order Details:</h1>
+
+    <!-- Search -->
+    <div class="search-hero">
+      <input class="form-control" type="text" name="search" [(ngModel)]="searchText" autocomplete="off"
+        placeholder="Searching for a product...">
+    </div>
+
+    <ng-container *ngFor="let item of itemsByCart">
+      <!-- Items -->
+      <div class="box">
+        <div style="width: 20%;">
+          <img src="http://localhost:3002/api/products/images/{{item.imageName}}">
+        </div>
+        <div style="width: 80%;">
+          <!-- Hight light the product name if search-->
+          <span [innerHtml]="item.productName | highlighter:searchText:'partial'"></span><br>
+          {{item.price | currency:"ILS"}}<span>X</span>{{item.amount}}<br>
+          סה"כ: {{item.totalPrice | currency:"ILS"}}
+        </div>
+      </div>
+    </ng-container>
+    <p>Total Cart Price: {{totalCartPrice | number : '.2-2' | currency:"ILS"}}</p>
+  </mat-card>
+
+  <!-- Order Form -->
+  <mat-card>
+    <a *ngIf="user && itemsByCart.length > 0" mat-button routerLink="/shop">Back to Shop 🛒</a>
+    <!-- <div class="formContainer"> -->
+    <!-- All Form -->
+    <mat-vertical-stepper [linear]="isLinear" #stepper>
+      <!-- First Form Group -->
+      <mat-step [stepControl]="firstFormGroup">
+        <form [formGroup]="firstFormGroup">
+          <ng-template matStepLabel>Delivery Details</ng-template>
+          <!-- City -->
+          <mat-form-field appearance="fill">
+            <mat-label>City</mat-label>
+            <mat-select name="city" [(ngModel)]="order.city" formControlName="cityCtrl">
+              <mat-option disabled (dblclick)="getCity()">Select city...</mat-option>
+              <mat-option *ngFor="let city of cities" [value]="city">{{city}}</mat-option>
+            </mat-select>
+            <mat-error *ngIf="firstFormGroup.controls['cityCtrl'].hasError('required')">City is required</mat-error>
+          </mat-form-field>
+          <br>
+          <!-- Street -->
+          <mat-form-field appearance="fill">
+            <mat-label>Street</mat-label>
+            <input matInput (dblclick)="getStreet()" name="street" [(ngModel)]="order.street" placeholder="Street"
+              formControlName="streetCtrl" minlength="2">
+            <mat-error *ngIf="firstFormGroup.controls['streetCtrl'].hasError('required')">Street is required
+            </mat-error>
+          </mat-form-field>
+          <br>
+          <!-- Delivery Date -->
+          <mat-form-field appearance="fill">
+            <mat-label>Delivery Date</mat-label>
+            <input type="date" matInput name="deliveryDate" min="{{minDate}}" [(ngModel)]="order.deliveryDate"
+              placeholder="Delivery Date" formControlName="deliveryDateCtrl">
+            <mat-error *ngIf="firstFormGroup.controls['deliveryDateCtrl'].hasError('required')">Delivery Date is
+              required
+            </mat-error>
+          </mat-form-field>
+          <!-- Buttons -->
+          <div>
+            <button mat-button matStepperNext>Next</button>
+          </div>
+        </form>
+      </mat-step>
+      <!-- Second Form Group -->
+      <mat-step [stepControl]="secondFormGroup">
+        <form [formGroup]="secondFormGroup">
+          <ng-template matStepLabel>Payments</ng-template>
+          <!-- Credit Card -->
+          <mat-form-field appearance="fill">
+            <mat-label>Credit Card</mat-label>
+            <input matInput name="creditCard" autocomplete="off" [(ngModel)]="order.creditCard"
+              placeholder="Credit Card" formControlName="creditCardCtrl" minlength="16" maxlength="16">
+            <mat-error *ngIf="secondFormGroup.controls['creditCardCtrl'].hasError('required')">Credit Card is required
+            </mat-error>
+            <mat-error
+              *ngIf="secondFormGroup.controls['creditCardCtrl'].hasError('minlength') || secondFormGroup.controls['creditCardCtrl'].hasError('maxlength')">
+              Credit Card must have 16 characters</mat-error>
+            <mat-error *ngIf="secondFormGroup.controls['creditCardCtrl'].hasError('pattern')">
+              Credit Card must be a Number
+            </mat-error>
+          </mat-form-field>
+          <!-- Buttons -->
+          <div>
+            <button mat-button matStepperPrevious>Back</button>
+            <button mat-button matStepperNext>Next</button>
+          </div>
+        </form>
+      </mat-step>
+      <!-- Third Form Group -->
+      <mat-step>
+        <ng-template matStepLabel>Done</ng-template>
+        <p>Please Press Order To Complete The Check Out.</p>
+        <div>
+          <button mat-button matStepperPrevious>Back</button>
+          <button mat-button (click)="send()">Order</button>
+        </div>
+      </mat-step>
+    </mat-vertical-stepper>
+
+    <!-- </div> -->
+  </mat-card>
+
+</div>

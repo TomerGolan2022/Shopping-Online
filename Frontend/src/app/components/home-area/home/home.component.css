@@ -1,0 +1,156 @@
+@import url(https://fonts.googleapis.com/css?family=Libre+Baskerville:400,700,400italic);
+
+section {
+    height: 300px;
+    width: 100%;
+    background-image: url("../../../../assets/images/sustainable-supermarket-theplanetapp-scaled.webp");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+p {
+    font-size: medium;
+}
+
+.logs-wrapper {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.social-logs-wrapper {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    flex: 1;
+}
+
+button:hover {
+    text-decoration: none;
+    -webkit-transform: scale(1.1);
+    -ms-transform: scale(1.1);
+    transform: scale(1.1);
+    background-color: rgba(128, 128, 128, 0.014)
+}
+
+.container {
+    /* background-color: rgba(211, 211, 211, 0.452); */
+    display: flex;
+    /* flex-wrap: wrap; */
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.social-btn {
+    max-width: 250px;
+}
+
+mat-card {
+    max-height: 100%;
+    text-align: left;
+    margin: 1rem;
+    font-family: 'Open Sans', sans-serif;
+}
+
+mat-card:not([class*=mat-elevation-z]) {
+    box-shadow: none;
+}
+
+.info-container {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.contain,
+.contain1,
+.contain2 {
+    overflow: hidden;
+    margin:auto ;
+    text-align: center;
+}
+
+.fancy-title {
+    margin: 0 0 1em 0;
+    letter-spacing: .2em;
+    position: relative;
+    overflow: hidden;
+}
+
+#line {
+    overflow: hidden;
+    height: auto;
+}
+
+p.norm {
+    letter-spacing: .2em;
+    font-size: 15px;
+    margin: 10px 0;
+    text-transform: uppercase;
+}
+
+.bold {
+    font-weight: 700;
+    font-size: 18px !important;
+    text-transform: uppercase;
+}
+
+.fancy-line {
+    line-height: 1;
+    text-align: center;
+    margin: auto;
+}
+
+.fancy-line span {
+    display: inline-block;
+    position: relative;
+    font-size: 15px;
+}
+
+.bold span {
+    font-size: 18px !important;
+}
+
+.fancy-line span:before,
+.fancy-line span:after {
+    content: "";
+    position: absolute;
+    height: 15px;
+    border-top: .07em solid #003263;
+    top: 7px;
+    width: 600px;
+}
+
+.fancy-line span:before {
+    right: 100%;
+    margin-right: 20px;
+}
+
+.fancy-line span:after {
+    left: 100%;
+    margin-left: 20px;
+}
+
+.icon {
+    height: 40px;
+    width: auto;
+    object-fit: contain;
+    padding-right: 15px;
+}
+
+li {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    margin-left: 5px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.cover {
+    height: auto; width: 100%;
+}

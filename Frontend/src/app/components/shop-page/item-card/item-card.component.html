@@ -1,0 +1,15 @@
+<div class="box">
+    <div style="width: 20%;">
+        <img src="http://localhost:3002/api/products/images/{{item.imageName}}">
+    </div>
+    <div style="width: 70%;">
+        {{item.productName}} <br>
+        {{item.price | currency:"ILS"}} X <input type="number"  min="1" max="20" name="amount" style="width: 50px;"
+            (change)="updateItem()" [(ngModel)]="item.amount"><br>
+       סה"כ: {{item.totalPrice | currency:"ILS"}}
+    </div>
+  
+    <div  style="width: 10%;">
+        <button mat-button (click)="deleteItem()">❌</button>
+    </div>
+</div>

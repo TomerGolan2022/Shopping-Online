@@ -1,0 +1,45 @@
+/* form {
+    width: 250px;
+    text-align: left;
+}
+
+h2 {
+    text-align: center;
+}
+
+input, button {
+    width: 100%;
+    box-sizing: border-box; 
+    margin-bottom: 20px;
+}
+
+span {
+    color: red;
+    margin: 0 20px;
+    position: absolute;
+} */
+
+mat-dialog-actions{
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  right: 20px;
+}
+
+.add-product-row{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+i{
+  position:relative;
+  right: 15px;
+  top:5px;
+}
+
+h2 {
+  text-align: center;
+}
+
+

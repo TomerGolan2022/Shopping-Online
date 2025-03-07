@@ -1,0 +1,51 @@
+<div class="nav-box">
+
+  <mat-toolbar>
+
+    <!-- <span class="img-name-box">
+      <a routerLink="/"> <img src="../../../../assets/images/LOGO.png" /></a>
+      <a class="welcome-auth-user" *ngIf="user" routerLink="/">Hello {{user.firstName}}!</a>
+      <a class="welcome-auth-user" *ngIf="!user" routerLink="/">Hello Guest!</a>
+    </span> -->
+
+    <ul class="navbar-actions">
+      <!-- Welcome Guest -->
+      <li *ngIf="!user">
+        <a mat-button routerLink="/" ><img
+            src="../../../../assets/images/LOGO.png" />Hello Guest!</a>
+      </li>
+      <!-- Welcome User -->
+      <li *ngIf="user">
+        <a mat-button routerLink="/" ><img
+            src="../../../../assets/images/LOGO.png" />Hello {{user.firstName}}!</a>
+      </li>
+    </ul>
+    <span class="spacer"></span>
+    <ul class="navbar-actions">
+      <!-- Login -->
+      <li (click)="openDialog()" *ngIf="!user">
+        <a mat-button routerLinkActive="active"><img src="../../../../assets/images/Login_Logout.png" />Login</a>
+      </li>
+      <!-- Register -->
+      <li *ngIf="!user">
+        <a mat-button routerLink="/register" routerLinkActive="active"><img
+            src="../../../../assets/images/Register.png" />Signup</a>
+      </li>
+      <!-- For Admin -->
+      <li *ngIf="user && isAdmin">
+        <a mat-button routerLink="/admin" routerLinkActive="active"><img
+            src="../../../../assets/images/Admin.png" />Admin</a>
+      </li>
+      <!-- Shop -->
+      <li *ngIf="user">
+        <a mat-button routerLink="/shop" routerLinkActive="active"><img
+            src="../../../../assets/images/Food.png" />Shop</a>
+      </li>
+      <!-- Logout -->
+      <li *ngIf="user" class="logout" (click)="logout()">
+        <a mat-button><img src="../../../../assets/images/Login_Logout.png" />Logout</a>
+      </li>
+    </ul>
+
+  </mat-toolbar>
+</div>

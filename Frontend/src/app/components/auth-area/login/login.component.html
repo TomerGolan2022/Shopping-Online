@@ -1,0 +1,26 @@
+<form [formGroup]="loginForm" class="login-container">
+     <!-- Username -->
+    <div class="login-row">
+        <i class="fas fa-user"></i>
+        <mat-form-field appearance="fill">
+            <mat-label>Email</mat-label>
+            <input type="text" matInput name="username" autocomplete="on" [(ngModel)]="credentials.username" placeholder="pat@example.com"
+                formControlName="usernameCtrl">
+        </mat-form-field>
+    </div>
+    <br>
+     <!-- Password -->
+    <div class="login-row">
+        <i class="fas fa-lock"></i>
+        <mat-form-field appearance="fill">
+            <mat-label>Password</mat-label>
+            <input type="password" matInput name="password" autocomplete="off" [(ngModel)]="credentials.password"
+                placeholder="Password" formControlName="passwordCtrl">
+        </mat-form-field>
+    </div>
+     <!-- Buttons -->
+    <mat-dialog-actions>
+        <button mat-button mat-dialog-close>Cancel</button>
+        <button mat-button [mat-dialog-close]="true" (click)="login()" [disabled]="loginForm.invalid">Login</button>
+    </mat-dialog-actions>
+</form>

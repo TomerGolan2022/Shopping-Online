@@ -1,0 +1,71 @@
+<mat-drawer-container class="example-container" autosize>
+
+    <div class="example-sidenav-content">
+        <!-- Open Side Bar Button -->
+        <button type="button" mat-button (click)="drawer.toggle()">
+            🔛
+        </button>
+
+        <!-- Search -->
+        <div class="searchContainer">
+            <div class="search-hero">
+                <input class="form-control" type="text" name="search" [(ngModel)]="searchText" autocomplete="off"
+                    placeholder="Searching for a product...">
+            </div>
+        </div>
+
+        <!-- Category Tabs -->
+        <mat-tab-group mat-stretch-tabs class="example-stretched-tabs mat-elevation-z4" style="direction: rtl;"
+            mat-align-tabs="center">
+            <!-- All Products -->
+            <mat-tab label="כל המחלקות">
+                <div class="cardList">
+                    <ng-container *ngFor="let p of allProducts | filter : searchText">
+                        <app-product-card class="cardListItem" [product]="p"></app-product-card>
+                    </ng-container>
+                </div>
+            </mat-tab>
+            <!-- Products By Category -->
+            <mat-tab *ngFor="let category of categories" label="{{category.categoryName}}">
+                <div class="cardList">
+                    <ng-container *ngFor="let p of allProducts | filter : searchText">
+                        <app-product-card *ngIf="p.categoryId === category.categoryId" class="cardListItem"
+                            [product]="p"></app-product-card>
+                    </ng-container>
+                </div>
+            </mat-tab>
+        </mat-tab-group>
+
+    </div>
+
+    <!-- Side Bar -->
+    <mat-drawer #drawer class="example-sidenav" opened mode="side">
+        <!-- For Admin -->
+        <h1 *ngIf="user && isAdmin">Only Display For Admin!</h1>
+        <!-- For Customer -->
+        <div *ngIf="user && isCustomer">
+            <!-- Shopping Cart -->
+            <h1>My Cart</h1>
+            <!-- Clear Cart button-->
+            <button *ngIf="user && itemsByCart.length > 0" mat-button (click)="clearCart()">Clear Cart
+                🗑️</button>
+            <p *ngIf="user && itemsByCart.length === 0">Your cart is empty</p>
+            <!-- Order button -->
+            <button *ngIf="user && itemsByCart.length > 0  && totalCartPrice >= 99" mat-button routerLink="/order">Check
+                Out 💳</button>
+            <button *ngIf="user && itemsByCart.length > 0  && totalCartPrice < 99" mat-button disabled
+                routerLink="/order">Check Out 💳</button><br>
+            <!-- Items -->
+            <ng-container *ngFor="let item of itemsByCart">
+                <app-item-card [item]="item"></app-item-card>
+            </ng-container>
+
+            <p *ngIf="user && itemsByCart.length > 0">Total Cart Price: {{totalCartPrice | number : '.2-2' | currency:
+                "ILS"}}</p>
+            <span *ngIf="user && itemsByCart.length > 0  && totalCartPrice < 99" style="font-size: smaller;">* Minimum
+                order
+                {{99 | number : '.2-2' | currency:"ILS"}}</span>
+        </div>
+    </mat-drawer>
+
+</mat-drawer-container>

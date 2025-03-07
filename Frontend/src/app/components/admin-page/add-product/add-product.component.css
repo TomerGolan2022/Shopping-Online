@@ -1,0 +1,24 @@
+mat-dialog-actions{
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  right: 20px;
+}
+
+.add-product-row{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+i{
+  position:relative;
+  right: 15px;
+  top:5px;
+}
+
+h2 {
+  text-align: center;
+}
+
+

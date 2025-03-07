@@ -1,0 +1,137 @@
+<!-- <section></section> -->
+<div class="container">
+
+    <!-- Login / Register -->
+    <mat-card *ngIf="!user" style="width: 30%;">
+        <mat-card-content *ngIf="!user">
+            <mat-card-title>Hello Guest,</mat-card-title>
+            <p>In order to continue to our shop you must login: </p>
+        </mat-card-content>
+        <mat-card-actions>
+            <div class="logs-wrapper">
+                <!-- Login -->
+                <li (click)="openDialog()" *ngIf="!user">
+                    <a mat-button routerLinkActive="mat-accent"><img class="icon "
+                            src="../../../../assets/images/Login_Logout.png" />Login</a>
+                </li>
+                <!-- Register -->
+                <li *ngIf="!user">
+                    <a mat-button routerLink="/register" routerLinkActive="active"><img class="icon "
+                            src="../../../../assets/images/Register.png" />Signup</a>
+                </li>
+                <div class="social-logs-wrapper"></div>
+            </div>
+        </mat-card-actions>
+        <img  class="cover" src="../../../../assets/images/istockphoto-1221455039-612x612.jpg">
+    </mat-card>
+
+    <!-- Welcome -->
+    <mat-card *ngIf="user" style="width: 30%;">
+        <mat-card-content>
+            <mat-card-title>Hello {{user.firstName}},</mat-card-title>
+            <!-- Old Customer -->
+            <p *ngIf="ordersByUser?.length > 1">
+                Good to see you again!
+            </p>
+            <!-- New Customer -->
+            <p *ngIf="ordersByUser?.length === 0 || cartsByUser?.length === 1 && cart && itemsByCart?.length === 0">
+                Welcome to your first purchase!
+            </p>
+        </mat-card-content>
+        <mat-card-actions>
+            <!-- For Customers -->
+            <div *ngIf="user && isCustomer">
+                <!-- Open Cart with Items -->
+                <li *ngIf="cart &&  itemsByCart?.length > 0">
+                    <a mat-button routerLink="/shop" routerLinkActive="active"><img class="icon "
+                            src="../../../../assets/images/Food.png" />Resume Shopping</a>
+                </li>
+                <!-- No Open Cart / No Items in Opened Cart -->
+                <li *ngIf="!cart || cart && itemsByCart?.length === 0">
+                    <a mat-button routerLink="/shop" routerLinkActive="active"><img class="icon "
+                            src="../../../../assets/images/Food.png" />Start Shopping</a>
+                </li>
+            </div>
+            <!-- For Admin -->
+            <div *ngIf="user && isAdmin">
+                <li>
+                    <a mat-button routerLink="/admin" routerLinkActive="active"><img class="icon "
+                            src="../../../../assets/images/Admin.png" />Go to Admin page</a>
+                </li>
+            </div>
+        </mat-card-actions>
+        <img  class="cover" src="../../../../assets/images/istockphoto-1221455039-612x612.jpg">
+    </mat-card>
+
+    <!-- About -->
+    <mat-card style="width: 40%;">
+        <div class="contain">
+            <p class="norm bold">Welcome</p>
+            <p id="line" class="fancy-title fancy-line"><span>To</span></p>
+            <p class="norm bold">Shopping Online</p>
+        </div>
+        <mat-card-content>
+            <p>
+                In our supermarket you will find the highest quality products at the best price!
+            </p>
+        </mat-card-content>
+        <img class="cover" src="../../../../assets/images/istockphoto-1157106624-612x612.jpg">
+    </mat-card>
+
+    <!-- Notifications -->
+    <mat-card style="width: 30%;">
+        <mat-card-content>
+            <!-- Products & Orders -->
+            <div>
+                <img  class="cover" src="../../../../assets/images/istockphoto-1270924947-612x612.jpg">
+                <p>Available products in our store: {{allProducts?.length}}</p>
+                <p>Number of orders submitted in our store: {{allOrders.length}} </p>
+            </div>
+            <div id="notifications" *ngIf="user && isCustomer" style="color: rgb(185, 185, 0);">
+                <h1 style="font-weight: bolder;">Notifications:</h1>
+                <!-- Last Order -->
+                <p *ngIf="lastOrder">
+                    Your last purchase was on {{lastOrder.orderDate |date}}.
+                </p>
+                <!-- Open Cart with Items -->
+                <div *ngIf="ordersByUser?.length > 0 && cart && itemsByCart?.length > 0">
+                    <p>
+                        You have open cart from {{cart.startDate |date}}.
+                    </p>
+                    <p>Total cart price: {{totalCartPrice | number : '.2-2' | currency: "ILS"}}
+                    </p>
+                    <p>
+                        Click to resume shopping:
+                    </p>
+
+                </div>
+
+                <!-- No Open Cart / No Items in Opened Cart -->
+                <p
+                    *ngIf="ordersByUser?.length > 0 && !cart || ordersByUser?.length > 0 && cart && itemsByCart?.length === 0">
+                    You don't have open cart... Click to start shopping:
+                </p>
+                <!-- No Orders History / No Items in First Cart -->
+                <p *ngIf="ordersByUser?.length === 0 || cartsByUser?.length === 1 && cart && itemsByCart?.length === 0">
+                    You haven't made an order yet.. Click to make your first purchase:
+                </p>
+            </div>
+        </mat-card-content>
+        <mat-card-actions>
+            <div *ngIf="user && isCustomer">
+                <!-- Open Cart with Items -->
+                <li *ngIf="cart && itemsByCart?.length > 0">
+                    <a mat-button routerLink="/shop" routerLinkActive="active"><img class="icon "
+                            src="../../../../assets/images/Food.png" />Shop</a>
+                </li>
+                <!-- No Open Cart / No Items in Opened Cart -->
+                <li *ngIf="!cart || cart && itemsByCart?.length === 0">
+                    <a mat-button routerLink="/shop" routerLinkActive="active"><img class="icon "
+                            src="../../../../assets/images/Food.png" />Shop</a>
+                </li>
+            </div>
+
+            
+        </mat-card-actions>
+    </mat-card>
+</div>

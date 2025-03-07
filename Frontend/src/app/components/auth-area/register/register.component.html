@@ -1,0 +1,125 @@
+<div class="contain">
+  <p class="norm bold">Register</p>
+  <p id="line" class="fancy-title fancy-line"><span>To</span></p>
+  <p class="norm bold">Shopping Online</p>
+</div>
+<div class="container">
+
+  <!-- All Form -->
+  <mat-vertical-stepper [linear]="isLinear" #stepper>
+    <!-- First Form Group -->
+    <mat-step [stepControl]="firstFormGroup">
+      <form [formGroup]="firstFormGroup">
+        <ng-template matStepLabel>Please Fill First Details</ng-template>
+        <!-- ID -->
+        <mat-form-field appearance="fill">
+          <mat-label>ID</mat-label>
+          <input matInput name="identifyNumber" autocomplete="off" [(ngModel)]="user.identifyNumber"
+            placeholder="Identify number" formControlName="identityNumberCtrl" minlength="9" maxlength="9">
+          <mat-error *ngIf="firstFormGroup.controls['identityNumberCtrl'].hasError('required')">ID is required
+          </mat-error>
+          <mat-error
+            *ngIf="firstFormGroup.controls['identityNumberCtrl'].hasError('minlength') || firstFormGroup.controls['identityNumberCtrl'].hasError('maxlength')">
+            ID must have 9 characters</mat-error>
+          <mat-error *ngIf="firstFormGroup.controls['identityNumberCtrl'].hasError('pattern')">
+            ID must be a Number
+          </mat-error>
+        </mat-form-field>
+        <br>
+        <!-- Username -->
+        <mat-form-field appearance="fill">
+          <mat-label>Email</mat-label>
+          <input matInput name="username" [(ngModel)]="user.username" placeholder="pat@example.com"
+            formControlName="usernameCtrl">
+          <mat-error *ngIf="firstFormGroup.controls['usernameCtrl'].hasError('required')">Email is required</mat-error>
+          <mat-error *ngIf="firstFormGroup.controls['usernameCtrl'].hasError('email')">Not a valid email</mat-error>
+          <mat-error *ngIf="firstFormGroup.controls['usernameCtrl'].hasError('usernameIsExist')">Email is Exist</mat-error>
+        </mat-form-field>
+        <br>
+        <!-- Password -->
+        <mat-form-field appearance="fill">
+          <mat-label>Password</mat-label>
+          <input type="password" matInput autocomplete="off" name="password" [(ngModel)]="user.password"
+            placeholder="Password" formControlName="passwordCtrl">
+          <mat-error *ngIf="firstFormGroup.controls['passwordCtrl'].hasError('required')">Password is required
+          </mat-error>
+          <mat-error *ngIf="firstFormGroup.controls['passwordCtrl'].hasError('minlength')">Password must have 6
+            characters</mat-error>
+        </mat-form-field>
+        <br>
+        <!-- Confirm Password -->
+        <mat-form-field appearance="fill">
+          <mat-label>Confirm Password</mat-label>
+          <input type="password" matInput autocomplete="off" placeholder="Confirm password"
+            formControlName="confirmPasswordCtrl" required>
+          <mat-error *ngIf="firstFormGroup.controls['confirmPasswordCtrl'].hasError('required')">Confirm password is required
+          </mat-error>
+          <mat-error *ngIf="firstFormGroup.controls['confirmPasswordCtrl'].hasError('passwordsNotMatching')">Passwords
+            do not match</mat-error>
+        </mat-form-field>
+        <!-- Buttons -->
+        <div>
+          <button mat-button matStepperNext>Next</button>
+        </div>
+      </form>
+    </mat-step>
+    <!-- Second Form Group -->
+    <mat-step [stepControl]="secondFormGroup">
+      <form [formGroup]="secondFormGroup">
+        <ng-template matStepLabel>Please Fill Additional Details</ng-template>
+        <!-- City -->
+        <mat-form-field appearance="fill">
+          <mat-label>City</mat-label>
+          <mat-select name="city" [(ngModel)]="user.city" formControlName="cityCtrl">
+            <mat-option disabled>Select city...</mat-option>
+            <mat-option *ngFor="let city of cities" [value]="city">{{city}}</mat-option>
+          </mat-select>
+          <mat-error *ngIf="secondFormGroup.controls['cityCtrl'].hasError('required')">City is required</mat-error>
+        </mat-form-field>
+        <br>
+        <!-- Street -->
+        <mat-form-field appearance="fill">
+          <mat-label>Street</mat-label>
+          <input matInput name="street" [(ngModel)]="user.street" placeholder="Street" formControlName="streetCtrl"
+            minlength="2">
+          <mat-error *ngIf="secondFormGroup.controls['streetCtrl'].hasError('required')">Street is required</mat-error>
+        </mat-form-field>
+        <br>
+        <!-- First Name -->
+        <mat-form-field appearance="fill">
+          <mat-label>First Name</mat-label>
+          <input matInput name="firstName" [(ngModel)]="user.firstName" placeholder="First name"
+            formControlName="firstNameCtrl" minlength="2">
+          <mat-error *ngIf="secondFormGroup.controls['firstNameCtrl'].hasError('required')">First name is required</mat-error>
+          <mat-error *ngIf="secondFormGroup.controls['firstNameCtrl'].hasError('minlength')">First name is too short</mat-error>
+        </mat-form-field>
+        <br>
+        <!-- Last Name -->
+        <mat-form-field appearance="fill">
+          <mat-label>Last Name</mat-label>
+          <input matInput name="lastName" [(ngModel)]="user.lastName" placeholder="Last name" formControlName="lastNameCtrl"
+            minlength="2">
+          <mat-error *ngIf="secondFormGroup.controls['lastNameCtrl'].hasError('required')">Last name is required</mat-error>
+          <mat-error *ngIf="secondFormGroup.controls['lastNameCtrl'].hasError('minlength')">Last name is too short</mat-error>
+        </mat-form-field>
+        <!-- Buttons -->
+        <div>
+          <button mat-button matStepperPrevious>Back</button>
+          <button mat-button matStepperNext>Next</button>
+        </div>
+      </form>
+    </mat-step>
+    <!-- Third Form Group -->
+    <mat-step>
+      <ng-template matStepLabel>Done</ng-template>
+      <div>
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-button (click)="register()">Register</button>
+      </div>
+    </mat-step>
+  </mat-vertical-stepper>
+
+</div>
+
+
+

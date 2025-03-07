@@ -1,0 +1,53 @@
+<mat-drawer-container class="example-container" autosize>
+
+    <div class="example-sidenav-content">
+        <!-- Open Side Bar Button -->
+        <button type="button" mat-button (click)="drawer.toggle()">
+            🔛
+        </button>
+
+        <!-- Search -->
+        <div class="container">
+            <div class="search-hero">
+                <input class="form-control" type="text" name="search" [(ngModel)]="searchText" autocomplete="off"
+                    placeholder="&#61442;  Start searching for a product">
+            </div>
+        </div>
+
+        <!-- Category Tabs -->
+        <mat-tab-group mat-stretch-tabs class="example-stretched-tabs mat-elevation-z4" style="direction: rtl;"
+            mat-align-tabs="center">
+            <!-- All Products -->
+            <mat-tab label="כל המחלקות">
+                <div class="cardList">
+                    <ng-container *ngFor="let p of allProducts | filter : searchText">
+                        <app-admin-product-card class="cardListItem" [product]="p"></app-admin-product-card>
+                    </ng-container>
+                </div>
+            </mat-tab>
+            <!-- Products By Category -->
+            <mat-tab *ngFor="let category of categories" label="{{category.categoryName}}">
+                <div class="cardList">
+                    <ng-container *ngFor="let p of allProducts | filter : searchText">
+                        <app-admin-product-card *ngIf="p.categoryId === category.categoryId" class="cardListItem"
+                            [product]="p"></app-admin-product-card>
+                    </ng-container>
+                </div>
+            </mat-tab>
+        </mat-tab-group>
+
+    </div>
+
+    <!-- Side Bar -->
+    <mat-drawer #drawer class="example-sidenav" opened mode="side">
+
+        <!-- Add Product -->
+        <button *ngIf="user && isAdmin" (click)="showAddition = true" mat-button>➕ New Product</button><br>
+        <app-add-product *ngIf="user && isAdmin && showAddition"></app-add-product>
+        <!-- Edit Product -->
+        <app-edit-product *ngIf="user && isAdmin && productToEdit && showEditing" [productToEdit]="productToEdit">
+        </app-edit-product>
+
+    </mat-drawer>
+
+</mat-drawer-container>
